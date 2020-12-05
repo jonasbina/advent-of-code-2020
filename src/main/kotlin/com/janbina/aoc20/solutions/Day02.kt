@@ -24,69 +24,50 @@ class Day02(
     fun part1(): Any {
         var vysledkovyint = 0
         inputLines.forEach {
-            val ah = mutableListOf<Char>()
-            for (i in 0..it.length - 1) {
-                if (it[i].toString() == "") {
-                } else if (it.toString() == ":") else {
-                    if (it[i].toString() == "-") {
-                        ah.add('-')
-                    } else {
-                        ah.add(it[i])
-                    }
+            val parts = it.split(" ", "-", ": ")
+            val cislo1 = parts[0].toInt()
+            val cislo2 = parts[1].toInt()
+            val pismeno = parts[2].first()
+            val heslo = parts[3]
+            var cislo = 0
+            heslo.forEach {
+                if (it == pismeno){
+                    cislo++
                 }
             }
-
-
-            var x = ""
-            var y = ""
-            var pocet = 0
-
-            while (true) {
-                if (ah[pocet].isDigit()) {
-                    x = x + ah[pocet]
-                } else {
-                    break
-                    pocet++
-                }
-                pocet++
-            }
-            while (true) {
-                if (ah[pocet].isDigit()) {
-                    y = y + ah[pocet]
-                } else {
-                    break
-                    pocet++
-                }
-                pocet++
-            }
-            val pismenko = ah[pocet]
-            pocet++
-            var stringik = ""
-            while (true) {
-                if (pocet > ah.lastIndex) {
-                    break
-                }
-                stringik = stringik + ah[pocet]
-                pocet++
-            }
-            var pocetpismenvhesle = 0
-            for (j in 0..stringik.lastIndex) {
-                if (pismenko == stringik[j]) {
-                    pocetpismenvhesle++
-                }
-            }
-            if (pocetpismenvhesle >= x.toInt() && pocetpismenvhesle <= y.toInt()) {
+            if (cislo >= cislo1 && cislo <= cislo2){
                 vysledkovyint++
             }
         }
+            return vysledkovyint
 
-        return vysledkovyint
+
     }
 
-
     fun part2(): Any {
+        var vysledkovyint = 0
+        inputLines.forEach {
+            val parts = it.split(" ", "-", ": ")
+            val cislo1 = parts[0].toInt()
+            val cislo2 = parts[1].toInt()
+            val pismeno = parts[2].first()
+            val heslo = parts[3]
+            var cislo = 0
+            var boolean1 = heslo[cislo1 - 1] == pismeno
+            var boolean2 = heslo[cislo2 - 1] == pismeno
+           if (boolean1){
+               if (boolean2 == false){
+                   vysledkovyint++
+               }
+           }
+            if (boolean2){
+                if (boolean1 == false){
+                    vysledkovyint++
+                }
+            }
 
-        return 0
+        }
+        return vysledkovyint
     }
 
 
